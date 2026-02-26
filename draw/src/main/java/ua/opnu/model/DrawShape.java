@@ -1,6 +1,9 @@
 package ua.opnu.model;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Shape;
 
 /*
  * Клас "Фігура для малювання".
@@ -14,6 +17,8 @@ public class DrawShape {
             shape = new Rectangle();
         } else if (shapeType == DrawShape.SHAPE_ROUNDED_RECT) {
             shape = new RoundedRectangle();
+        } else if (shapeType == DrawShape.SHAPE_ELLIPSE) {
+            shape = new EllipseShape();
         }
         return shape;
     }
@@ -21,20 +26,28 @@ public class DrawShape {
     // Константи для типів фігур
     public static final int SHAPE_RECTANGLE = 0;
     public static final int SHAPE_ROUNDED_RECT = 1;
+    public static final int SHAPE_ELLIPSE = 2;
 
     // Початкова та кінцева точки
     private Point startPoint;
     private Point endPoint;
+    private Color color;
 
     // Конструктор без параметрів
     public DrawShape() {
-        this(new Point(0, 0), new Point(0, 0));
+        this(new Point(0, 0), new Point(0, 0), Color.BLACK);
     }
 
     // Конструктор з початковими координатами
     public DrawShape(Point startPoint, Point endPoint) {
+        this(startPoint, endPoint, Color.BLACK);
+    }
+
+    // Конструктор з кольором
+    public DrawShape(Point startPoint, Point endPoint, Color color) {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
+        this.color = color;
     }
 
     // Метод повертає фігуру, яку можна намалювати
@@ -54,4 +67,14 @@ public class DrawShape {
     public void setEndPoint(Point endPoint) {
         this.endPoint = endPoint;
     }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }
+
+

@@ -1,11 +1,20 @@
 package ua.opnu.view;
 
-import ua.opnu.model.DrawShape;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 
-import java.awt.*;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
+import org.w3c.dom.events.MouseEvent;
+
+import ua.opnu.model.DrawShape;
+import ua.opnu.model.EllipseShape;
 
 /**
  * Головне вікно програми. Фрейм (клас JFrame) є контейнером верхнього рівня
@@ -99,10 +108,23 @@ public class DrawFrame extends JFrame {
         // Додаємо другу кнопку на верхню панель
         buttonPanel.add(rounded_rect);
 
-        // TODO: додати кнопку для еліпса за аналогією з іншими кнопками
-        // TODO: для додаткових балів додати кнопку "Clear" для очищення всіх фігур
+        // 3. Кнопка для еліпса
+        BigTextButton ellipse = new BigTextButton("Ellipse");
+        ellipse.addActionListener(e -> {
+            surface.setShapeType(DrawShape.SHAPE_ELLIPSE);
+        });
+        buttonPanel.add(ellipse);
+
+        // 4. Кнопка для очищення
+        BigTextButton clear = new BigTextButton("Clear");
+        clear.addActionListener(e -> {
+            surface.clearShapes();
+        });
+        buttonPanel.add(clear);
 
         return buttonPanel;
     }
+
+
 }
 
